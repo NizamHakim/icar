@@ -131,29 +131,89 @@ abstract class AuthLocalizations {
   /// **'Doesn\'t have an account?'**
   String get doesntHaveAnAccount;
 
-  /// No description provided for @inputLabel.
+  /// No description provided for @inputLabelName.
   ///
   /// In en, this message translates to:
-  /// **'{label, select, name{Name} email{Email} password{Password} confirmPassword{Confirm Password} other{Unknown value}}'**
-  String inputLabel(String label);
+  /// **'Name'**
+  String get inputLabelName;
 
-  /// No description provided for @inputHint.
+  /// No description provided for @inputLabelEmail.
   ///
   /// In en, this message translates to:
-  /// **'{hint, select, name{Enter your name} email{Enter your email} password{Enter your password} confirmPassword{Enter your password} other{Unknown value}}'**
-  String inputHint(String hint);
+  /// **'Email'**
+  String get inputLabelEmail;
 
-  /// No description provided for @inputError.
+  /// No description provided for @inputLabelPassword.
   ///
   /// In en, this message translates to:
-  /// **'{error, select, name_required{Name is required} email_required{Email is required} email_invalid{Email is invalid} email_registered{Email is already registered} credentials_mismatch{Email and password combination is incorrect} password_required{Password is required} password_tooShort{Password must be at least 8 characters long} confirmPassword_required{Confirm password is required} confirmPassword_mismatch{Confirm password and password does not match} other{An unexpected error occurred}}'**
-  String inputError(String error);
+  /// **'Password'**
+  String get inputLabelPassword;
 
-  /// No description provided for @authSuccess.
+  /// No description provided for @inputLabelConfirmPassword.
   ///
   /// In en, this message translates to:
-  /// **'{success, select, login_success{Login successful} user_created_successfully{Account successfully created} logout_success{Logout successful} other{Unknown value}}'**
-  String authSuccess(String success);
+  /// **'Confirm Password'**
+  String get inputLabelConfirmPassword;
+
+  /// No description provided for @inputHintName.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your name'**
+  String get inputHintName;
+
+  /// No description provided for @inputHintEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your email'**
+  String get inputHintEmail;
+
+  /// No description provided for @inputHintPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your password'**
+  String get inputHintPassword;
+
+  /// No description provided for @inputHintConfirmPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your password'**
+  String get inputHintConfirmPassword;
+
+  /// No description provided for @inputNameError.
+  ///
+  /// In en, this message translates to:
+  /// **'{nameError, select, name_required{Name is required} other{Unknown value}}'**
+  String inputNameError(String nameError);
+
+  /// No description provided for @inputEmailError.
+  ///
+  /// In en, this message translates to:
+  /// **'{emailError, select, email_required{Email is required} email_invalid{Email is invalid} email_registered{Email is already registered} credentials_mismatch{Email and password combination is incorrect} other{Unknown value}}'**
+  String inputEmailError(String emailError);
+
+  /// No description provided for @inputPasswordError.
+  ///
+  /// In en, this message translates to:
+  /// **'{passwordError, select, password_required{Password is required} password_tooShort{Password must be at least 8 characters long} confirmPassword_required{Confirm password is required} confirmPassword_mismatch{Confirm password and password does not match} credentials_mismatch{Email and password combination is incorrect} other{Unknown value}}'**
+  String inputPasswordError(String passwordError);
+
+  /// No description provided for @login_success.
+  ///
+  /// In en, this message translates to:
+  /// **'Login successful'**
+  String get login_success;
+
+  /// No description provided for @user_created_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Account successfully created'**
+  String get user_created_successfully;
+
+  /// No description provided for @logout_success.
+  ///
+  /// In en, this message translates to:
+  /// **'Logout successful'**
+  String get logout_success;
 }
 
 class _AuthLocalizationsDelegate extends LocalizationsDelegate<AuthLocalizations> {

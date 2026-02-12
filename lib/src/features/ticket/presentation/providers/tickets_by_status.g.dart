@@ -6,7 +6,7 @@ part of 'tickets_by_status.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$ticketsByStatusHash() => r'f3b3116e39a8608def19d88b50a77ca61c41b677';
+String _$ticketsByStatusHash() => r'220146caa8a2c976e12666d3cb8ede51915d59a6';
 
 /// Copied from Dart SDK
 class _SystemHash {

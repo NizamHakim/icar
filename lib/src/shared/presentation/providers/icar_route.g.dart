@@ -6,7 +6,7 @@ part of 'icar_route.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$icarRouteHash() => r'2c264140c3afac6c1a20fe4cd3ce4fa05f8944c7';
+String _$icarRouteHash() => r'43cf9089553cf2bfee8429b46e3fe0b21f0cca11';
 
 /// Copied from Dart SDK
 class _SystemHash {

@@ -1,11 +1,12 @@
 #!/bin/bash
 
-DOMAINS=(shared auth home map onboarding profile ticket location notification schedule failure)
+DOMAINS=(shared auth home map onboarding profile ticket location notification schedule failure augmented_reality)
 
 OUTPUT_DIR="lib/src/l10n/generated"
 
 for DOMAIN in "${DOMAINS[@]}"; do
     CAPITALIZED_DOMAIN="$(tr '[:lower:]' '[:upper:]' <<< "${DOMAIN:0:1}")${DOMAIN:1}"
+    CAPITALIZED_DOMAIN="${CAPITALIZED_DOMAIN//_/}"
     
     echo "⚡️ Generating localizations for: $DOMAIN"
     

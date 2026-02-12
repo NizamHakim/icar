@@ -30,33 +30,33 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<Either<Failure, (User, String)>> login(
-    String email,
-    String password,
-  ) async {
+  Future<Either<Failure, User>> login({
+    required String email,
+    required String password,
+  }) async {
     try {
-      final (userModel, message) = await _authRemote.login(email, password);
-      return Right((userModel.toEntity(), message));
+      final userDto = await _authRemote.login(email: email, password: password);
+      return Right(userDto.toEntity());
     } catch (e) {
       return Left(Failure.fromException(e));
     }
   }
 
   @override
-  Future<Either<Failure, (User, String)>> signup(
-    String name,
-    String email,
-    String password,
-    String confirmPassword,
-  ) async {
+  Future<Either<Failure, User>> signup({
+    required String name,
+    required String email,
+    required String password,
+    required String confirmPassword,
+  }) async {
     try {
-      final (userModel, message) = await _authRemote.signup(
+      final userDto = await _authRemote.signup(
         name: name,
         email: email,
         password: password,
         confirmPassword: confirmPassword,
       );
-      return Right((userModel.toEntity(), message));
+      return Right(userDto.toEntity());
     } catch (e) {
       return Left(Failure.fromException(e));
     }

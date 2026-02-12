@@ -6,7 +6,7 @@ part of 'current_locale.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$currentLocaleHash() => r'93d591430191ce6ae1eb1d4cf91aae1a3c9b667f';
+String _$currentLocaleHash() => r'd687795566bd9afd3ea0cb1f09ca278ce374cb3e';
 
 /// See also [CurrentLocale].
 @ProviderFor(CurrentLocale)

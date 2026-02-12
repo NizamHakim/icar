@@ -8,14 +8,17 @@ import 'package:icar/src/features/schedule/domain/entities/schedule.dart';
 import 'package:icar/src/features/ticket/presentation/providers/create_ticket.dart';
 import 'package:icar/src/core/config/themes/app_colors.dart';
 import 'package:icar/src/core/config/themes/app_icons.dart';
+import 'package:icar/src/l10n/generated/failure_localizations.dart';
 import 'package:icar/src/l10n/generated/schedule_localizations.dart';
 import 'package:icar/src/l10n/generated/shared_localizations.dart';
+import 'package:icar/src/l10n/generated/ticket_localizations.dart';
 import 'package:icar/src/shared/domain/entities/icar_route.dart';
 import 'package:icar/src/shared/domain/entities/icar_stop.dart';
 import 'package:icar/src/shared/presentation/widgets/circular_loader.dart';
 import 'package:icar/src/features/schedule/presentation/widgets/confirm_schedule_tile.dart';
 import 'package:icar/src/utils/extension/datetime_extension.dart';
 import 'package:icar/src/utils/networks/post_response_handler.dart';
+import 'package:icar/src/utils/show_snackbar.dart';
 
 class ConfirmScheduleDialog extends ConsumerWidget {
   const ConfirmScheduleDialog({
@@ -38,7 +41,22 @@ class ConfirmScheduleDialog extends ConsumerWidget {
       postResponseHandler(
         context,
         next,
-        onSuccess: () => context.pop(next.value),
+        onSuccess: () {
+          showSnackBar(
+            context,
+            TicketLocalizations.of(context)!.ticketCreateSuccess,
+          );
+          context.pop(next.value);
+        },
+        onError: () {
+          showSnackBar(
+            context,
+            FailureLocalizations.of(context)!.unexpectedError,
+            textColor: AppColors.white,
+            backgroundColor: AppColors.error500,
+            showCloseIcon: true,
+          );
+        },
       );
     });
 

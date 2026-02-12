@@ -6,7 +6,7 @@ part of 'selected_icar_stop.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$selectedIcarStopHash() => r'7dfaa3588e6ea3005d30021a0e8e5cdccdd6647e';
+String _$selectedIcarStopHash() => r'906bcee36c2595fe1a9af0a0a6224c01a89321ff';
 
 /// See also [SelectedIcarStop].
 @ProviderFor(SelectedIcarStop)

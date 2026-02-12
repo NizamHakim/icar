@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:icar/src/core/errors/exception.dart';
-import 'package:icar/src/features/auth/data/models/user_model.dart';
+import 'package:icar/src/features/auth/data/dto/user_dto.dart';
 import 'package:icar/src/utils/networks/body_builder.dart';
 import 'package:icar/src/utils/networks/response_handler.dart';
 import 'package:icar/src/utils/networks/headers_builder.dart';
@@ -16,20 +16,20 @@ AuthRemoteDatasource authRemoteDatasource(Ref ref) {
 }
 
 class AuthRemoteDatasource {
-  Future<UserModel> getUser(String token) async {
+  Future<UserDto> getUser(String token) async {
     final response = await http.get(
       uriBuilder(endpoint: "/api/auth"),
       headers: headersBuilder(token: token),
     );
 
-    return responseHandler<UserModel>(
+    return responseHandler<UserDto>(
       response,
-      onSuccess: (serverResponse) => UserModel.fromJson(serverResponse.data),
+      onSuccess: (serverResponse) => UserDto.fromJson(serverResponse.data),
       onError: (json) => throw ServerException.fromJson(json),
     );
   }
 
-  Future<(UserModel, String)> signup({
+  Future<UserDto> signup({
     required String name,
     required String email,
     required String password,
@@ -46,33 +46,26 @@ class AuthRemoteDatasource {
       }),
     );
 
-    return responseHandler<(UserModel, String)>(
+    return responseHandler<UserDto>(
       response,
-      onSuccess: (serverResponse) {
-        return (
-          UserModel.fromJson(serverResponse.data),
-          serverResponse.message!,
-        );
-      },
+      onSuccess: (serverResponse) => UserDto.fromJson(serverResponse.data),
       onError: (json) => throw ServerException.fromJson(json),
     );
   }
 
-  Future<(UserModel, String)> login(String email, String password) async {
+  Future<UserDto> login({
+    required String email,
+    required String password,
+  }) async {
     final response = await http.post(
       uriBuilder(endpoint: "/api/auth/login"),
       headers: headersBuilder(),
       body: bodyBuilder({"email": email, "password": password}),
     );
 
-    return responseHandler<(UserModel, String)>(
+    return responseHandler<UserDto>(
       response,
-      onSuccess: (serverResponse) {
-        return (
-          UserModel.fromJson(serverResponse.data),
-          serverResponse.message!,
-        );
-      },
+      onSuccess: (serverResponse) => UserDto.fromJson(serverResponse.data),
       onError: (json) => throw ServerException.fromJson(json),
     );
   }

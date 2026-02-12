@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:icar/src/core/config/app_dot_env.dart';
 import 'package:icar/src/features/auth/presentation/providers/current_user.dart';
-import 'package:icar/src/shared/data/models/icar_websocket_response_model.dart';
+import 'package:icar/src/shared/data/dto/icar_websocket_response_dto.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:web_socket_channel/io.dart';
 
@@ -24,11 +24,10 @@ class IcarWebsocketDatasource {
   final String _token;
   late IOWebSocketChannel _webSocketChannel;
   bool _isDisposed = false;
-  final StreamController<IcarWebsocketResponseModel>
-  _websocketStreamController =
-      StreamController<IcarWebsocketResponseModel>.broadcast();
+  final StreamController<IcarWebsocketResponseDto> _websocketStreamController =
+      StreamController<IcarWebsocketResponseDto>.broadcast();
   StreamSubscription<dynamic>? _webSocketSubscription;
-  Stream<IcarWebsocketResponseModel> get stream =>
+  Stream<IcarWebsocketResponseDto> get stream =>
       _websocketStreamController.stream;
 
   IcarWebsocketDatasource(this._token) {
@@ -51,7 +50,7 @@ class IcarWebsocketDatasource {
 
     _webSocketSubscription = _webSocketChannel.stream.listen(
       (data) {
-        final websocketResponse = IcarWebsocketResponseModel.fromJson(
+        final websocketResponse = IcarWebsocketResponseDto.fromJson(
           jsonDecode(data),
         );
         _websocketStreamController.add(websocketResponse);

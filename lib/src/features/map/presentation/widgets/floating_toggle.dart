@@ -9,22 +9,22 @@ class FloatingToggle extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final routeList = ref.watch(routesVisibilityProvider).requireValue;
+    final routesStateList = ref.watch(routesVisibilityProvider).requireValue;
 
     return Card(
       child: Column(
         children: [
-          for (var i = 0; i < routeList.length; i++) ...[
+          for (var i = 0; i < routesStateList.length; i++) ...[
             FloatingToggleRouteCheckbox(
-              icarRoute: routeList[i].route,
-              isChecked: routeList[i].visible,
+              icarRoute: routesStateList[i].route,
+              isChecked: routesStateList[i].visible,
               onChanged: () {
                 ref
                     .read(routesVisibilityProvider.notifier)
-                    .toggleRouteVisibility(routeList[i]);
+                    .toggleRouteVisibility(routeState: routesStateList[i]);
               },
             ),
-            if (i != routeList.length - 1)
+            if (i != routesStateList.length - 1)
               const Divider(height: 0, color: AppColors.gray100),
           ],
         ],

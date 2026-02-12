@@ -1,0 +1,8 @@
+{
+  "@@locale": "en",
+  "cameraPermissionTitle": "Camera Permission",
+  "cameraPermissionDesc": "Grant camera permission to use AR feature.",
+  "stayDisabled": "Stay Disabled",
+  "grantPermission": "Grant Permission",
+  "enable": "Enable"
+}

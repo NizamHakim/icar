@@ -11,16 +11,16 @@ class IcarRouteRepositoryImpl extends IcarRouteRepository {
 
   @override
   Future<Either<Failure, List<IcarRoute>>> getRoutes(
-    String token,
-    bool polyline,
-  ) async {
+    String token, {
+    required bool polyline,
+  }) async {
     try {
       final result = await _icarRouteRemote.getRoutes(
         token,
         polyline: polyline,
       );
       return Right(
-        result.map((icarRouteModel) => icarRouteModel.toEntity()).toList(),
+        result.map((icarRouteDto) => icarRouteDto.toEntity()).toList(),
       );
     } catch (e) {
       return Left(Failure.fromException(e));
@@ -29,11 +29,14 @@ class IcarRouteRepositoryImpl extends IcarRouteRepository {
 
   @override
   Future<Either<Failure, IcarRoute>> getRouteById(
-    String token,
-    int icarRouteId,
-  ) async {
+    String token, {
+    required int icarRouteId,
+  }) async {
     try {
-      final result = await _icarRouteRemote.getRouteById(token, icarRouteId);
+      final result = await _icarRouteRemote.getRouteById(
+        token,
+        icarRouteId: icarRouteId,
+      );
       return Right(result.toEntity());
     } catch (e) {
       return Left(Failure.fromException(e));

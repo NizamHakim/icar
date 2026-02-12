@@ -134,16 +134,11 @@ class TicketLocalizationsEn extends TicketLocalizations {
   String get cancelTicketDialogCancel => 'Stay on queue';
 
   @override
-  String ticketSuccess(String success) {
-    String _temp0 = intl.Intl.selectLogic(
-      success,
-      {
-        'ticket_created_successfully': 'Ticket created successfully',
-        'ticket_status_updated_successfully': 'Ticket updated successfully',
-        'ticket_review_updated_successfully': 'Review updated successfully',
-        'other': 'Unknown value',
-      },
-    );
-    return '$_temp0';
-  }
+  String get ticketCreateSuccess => 'Ticket created successfully';
+
+  @override
+  String get ticketUpdateSuccess => 'Ticket updated successfully';
+
+  @override
+  String get reviewUpdateSuccess => 'Review updated successfully';
 }

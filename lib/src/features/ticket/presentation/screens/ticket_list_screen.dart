@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:icar/src/features/ticket/presentation/providers/tickets_by_status.dart';
 import 'package:icar/src/features/ticket/presentation/widgets/ticket_queue_card.dart';
 import 'package:icar/src/l10n/generated/ticket_localizations.dart';
+import 'package:icar/src/utils/fake_data.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:icar/src/features/ticket/domain/entities/ticket.dart';
 import 'package:icar/src/features/ticket/domain/entities/ticket_status.dart';
@@ -92,7 +93,15 @@ class _TicketList extends ConsumerWidget {
       loading: () {
         return _content(
           context,
-          ticketsData: fakeTicketsList,
+          ticketsData: List.generate(
+            3,
+            (index) => fakeTicket.copyWith(
+              schedule: fakeSchedule1.copyWith(
+                icarStop: fakeIcarStop,
+                icar: fakeIcar.copyWith(icarRoute: fakeIcarRoute),
+              ),
+            ),
+          ),
           isLoading: true,
           onRefresh: () {
             return ref.refresh(ticketsByStatusProvider(ticketStatus).future);

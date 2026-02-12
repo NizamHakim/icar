@@ -9,46 +9,25 @@ class HomeLocalizationsEn extends HomeLocalizations {
   HomeLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String checkQueueLabel(String label) {
-    String _temp0 = intl.Intl.selectLogic(
-      label,
-      {
-        'stop': 'Stop',
-        'route': 'Route',
-        'other': 'Unknown value',
-      },
-    );
-    return '$_temp0';
-  }
+  String get checkQueueLabelStop => 'Stop';
 
   @override
-  String checkQueueHint(String hint) {
-    String _temp0 = intl.Intl.selectLogic(
-      hint,
-      {
-        'stop': 'Select a stop',
-        'route': 'Select a route',
-        'other': 'Unknown value',
-      },
-    );
-    return '$_temp0';
-  }
+  String get checkQueueLabelRoute => 'Route';
+
+  @override
+  String get checkQueueHintStop => 'Select a stop';
+
+  @override
+  String get checkQueueHintRoute => 'Select a route';
 
   @override
   String get checkQueueSubmitButton => 'Check iCar queue';
 
   @override
-  String selectStopLabel(String label) {
-    String _temp0 = intl.Intl.selectLogic(
-      label,
-      {
-        'latest_search': 'Latest search',
-        'all_options': 'Stops',
-        'other': 'Unknown value',
-      },
-    );
-    return '$_temp0';
-  }
+  String get selectStopLabelLatestSearch => 'Latest search';
+
+  @override
+  String get selectStopLabelAllOptions => 'Stops';
 
   @override
   String get selectStopFindStopHint => 'Find a stop...';

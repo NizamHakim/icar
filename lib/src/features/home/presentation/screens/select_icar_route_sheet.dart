@@ -8,6 +8,7 @@ import 'package:icar/src/core/config/themes/app_colors.dart';
 import 'package:icar/src/features/home/presentation/widgets/select_icar_route_radio.dart';
 import 'package:icar/src/l10n/generated/shared_localizations.dart';
 import 'package:icar/src/shared/domain/entities/icar_route.dart';
+import 'package:icar/src/utils/fake_data.dart';
 import 'package:icar/src/utils/handle_error.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -57,7 +58,9 @@ class _SelectIcarRouteSheetState extends ConsumerState<SelectIcarRouteSheet> {
         loading: () {
           return _content(
             context,
-            icarRoutesOptionsData: fakeIcarRoutes,
+            icarRoutesOptionsData: List.generate(2, (index) {
+              return fakeIcarRoute;
+            }),
             isLoading: true,
           );
         },
@@ -86,7 +89,7 @@ class _SelectIcarRouteSheetState extends ConsumerState<SelectIcarRouteSheet> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 20),
             child: Text(
-              HomeLocalizations.of(context)!.checkQueueHint('route'),
+              HomeLocalizations.of(context)!.checkQueueHintRoute,
               style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                 fontWeight: FontWeight.w600,
                 color: AppColors.gray700,

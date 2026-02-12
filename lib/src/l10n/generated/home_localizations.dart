@@ -95,17 +95,29 @@ abstract class HomeLocalizations {
     Locale('id')
   ];
 
-  /// No description provided for @checkQueueLabel.
+  /// No description provided for @checkQueueLabelStop.
   ///
   /// In en, this message translates to:
-  /// **'{label, select, stop{Stop} route{Route} other{Unknown value}}'**
-  String checkQueueLabel(String label);
+  /// **'Stop'**
+  String get checkQueueLabelStop;
 
-  /// No description provided for @checkQueueHint.
+  /// No description provided for @checkQueueLabelRoute.
   ///
   /// In en, this message translates to:
-  /// **'{hint, select, stop{Select a stop} route{Select a route} other{Unknown value}}'**
-  String checkQueueHint(String hint);
+  /// **'Route'**
+  String get checkQueueLabelRoute;
+
+  /// No description provided for @checkQueueHintStop.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a stop'**
+  String get checkQueueHintStop;
+
+  /// No description provided for @checkQueueHintRoute.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a route'**
+  String get checkQueueHintRoute;
 
   /// No description provided for @checkQueueSubmitButton.
   ///
@@ -113,11 +125,17 @@ abstract class HomeLocalizations {
   /// **'Check iCar queue'**
   String get checkQueueSubmitButton;
 
-  /// No description provided for @selectStopLabel.
+  /// No description provided for @selectStopLabelLatestSearch.
   ///
   /// In en, this message translates to:
-  /// **'{label, select, latest_search{Latest search} all_options{Stops} other{Unknown value}}'**
-  String selectStopLabel(String label);
+  /// **'Latest search'**
+  String get selectStopLabelLatestSearch;
+
+  /// No description provided for @selectStopLabelAllOptions.
+  ///
+  /// In en, this message translates to:
+  /// **'Stops'**
+  String get selectStopLabelAllOptions;
 
   /// No description provided for @selectStopFindStopHint.
   ///

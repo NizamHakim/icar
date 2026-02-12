@@ -23,7 +23,7 @@ final isDoingReviewProvider =
     );
 
 typedef _$IsDoingReview = AutoDisposeNotifier<bool>;
-String _$updateReviewHash() => r'89633ced07bf8deff777299e1a26e45a92edfafd';
+String _$updateReviewHash() => r'c849fd0d7d796432f4346669351c6061192ebd8d';
 
 /// See also [UpdateReview].
 @ProviderFor(UpdateReview)

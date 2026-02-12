@@ -19,7 +19,7 @@ class SelectIcarStopHistory extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          HomeLocalizations.of(context)!.selectStopLabel('latest_search'),
+          HomeLocalizations.of(context)!.selectStopLabelLatestSearch,
           style: Theme.of(
             context,
           ).textTheme.labelMedium!.copyWith(color: AppColors.gray500),

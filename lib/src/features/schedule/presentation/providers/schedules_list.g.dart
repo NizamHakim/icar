@@ -6,7 +6,7 @@ part of 'schedules_list.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$schedulesListHash() => r'8010bd3d8f59f6a7f3ff15c27bed5b6473e233a5';
+String _$schedulesListHash() => r'82036a2df271aad6769f90e1f20a13c24d67909f';
 
 /// Copied from Dart SDK
 class _SystemHash {

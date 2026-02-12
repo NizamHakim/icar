@@ -11,10 +11,10 @@ class ScheduleRepositoryImpl extends ScheduleRepository {
 
   @override
   Future<Either<Failure, List<Schedule>>> getSchedulesByStopAndRoute(
-    String token,
-    int icarStopId,
-    int icarRouteId,
-  ) async {
+    String token, {
+    required int icarStopId,
+    required int icarRouteId,
+  }) async {
     try {
       final result = await _scheduleRemote.getSchedules(
         token,
@@ -22,7 +22,7 @@ class ScheduleRepositoryImpl extends ScheduleRepository {
         icarRouteId: icarRouteId,
       );
       return Right(
-        result.map((scheduleModel) => scheduleModel.toEntity()).toList(),
+        result.map((scheduleDto) => scheduleDto.toEntity()).toList(),
       );
     } catch (e) {
       return Left(Failure.fromException(e));

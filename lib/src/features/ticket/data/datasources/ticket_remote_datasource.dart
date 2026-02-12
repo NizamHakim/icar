@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:icar/src/core/errors/exception.dart';
-import 'package:icar/src/features/ticket/data/models/review_model.dart';
-import 'package:icar/src/features/ticket/data/models/ticket_model.dart';
+import 'package:icar/src/features/ticket/data/dto/review_dto.dart';
+import 'package:icar/src/features/ticket/data/dto/ticket_dto.dart';
 import 'package:icar/src/features/ticket/domain/entities/ticket_status.dart';
 import 'package:icar/src/utils/networks/body_builder.dart';
 import 'package:icar/src/utils/networks/headers_builder.dart';
@@ -18,30 +18,24 @@ TicketRemoteDatasource ticketRemoteDatasource(Ref ref) {
 }
 
 class TicketRemoteDatasource {
-  Future<List<TicketModel>> getTickets(
+  Future<List<TicketDto>> getTickets(
     String token, {
     TicketStatus? status,
-    int? limit,
-    int? cursor,
   }) async {
     final response = await http.get(
       uriBuilder(
         endpoint: "/api/tickets",
-        queryParameters: {
-          "status": status?.name,
-          "limit": limit,
-          "cursor": cursor,
-        },
+        queryParameters: {"status": status?.name},
       ),
       headers: headersBuilder(token: token),
     );
 
-    return responseHandler<List<TicketModel>>(
+    return responseHandler<List<TicketDto>>(
       response,
       onSuccess: (serverResponse) {
         final ticketList =
             (serverResponse.data as List)
-                .map((ticket) => TicketModel.fromJson(ticket))
+                .map((ticket) => TicketDto.fromJson(ticket))
                 .toList();
         return ticketList;
       },
@@ -49,45 +43,40 @@ class TicketRemoteDatasource {
     );
   }
 
-  Future<TicketModel> getTicketById(String token, int ticketId) async {
+  Future<TicketDto> getTicketById(String token, {required int ticketId}) async {
     final response = await http.get(
       uriBuilder(endpoint: "/api/tickets/$ticketId"),
       headers: headersBuilder(token: token),
     );
 
-    return responseHandler<TicketModel>(
+    return responseHandler<TicketDto>(
       response,
-      onSuccess: (serverResponse) => TicketModel.fromJson(serverResponse.data),
+      onSuccess: (serverResponse) => TicketDto.fromJson(serverResponse.data),
       onError: (json) => throw ServerException.fromJson(json),
     );
   }
 
-  Future<(TicketModel, String)> createTicket(
-    String token,
-    int scheduleId,
-  ) async {
+  Future<TicketDto> createTicket(
+    String token, {
+    required int scheduleId,
+  }) async {
     final response = await http.post(
       uriBuilder(endpoint: "/api/tickets/create"),
       headers: headersBuilder(token: token),
       body: bodyBuilder({"scheduleId": scheduleId}),
     );
 
-    return responseHandler<(TicketModel, String)>(
+    return responseHandler<TicketDto>(
       response,
-      onSuccess: (serverResponse) {
-        return (
-          TicketModel.fromJson(serverResponse.data),
-          serverResponse.message!,
-        );
-      },
+      onSuccess: (serverResponse) => TicketDto.fromJson(serverResponse.data),
       onError: (json) => throw ServerException.fromJson(json),
     );
   }
 
-  Future<(TicketModel, String)> updateTicket(
+  Future<TicketDto> updateTicket(
     String token,
     int ticketId, {
-    ReviewModel? newReview,
+    ReviewDto? newReview,
     TicketStatus? newStatus,
   }) async {
     final response = await http.patch(
@@ -99,14 +88,9 @@ class TicketRemoteDatasource {
       }),
     );
 
-    return responseHandler<(TicketModel, String)>(
+    return responseHandler<TicketDto>(
       response,
-      onSuccess: (serverResponse) {
-        return (
-          TicketModel.fromJson(serverResponse.data),
-          serverResponse.message!,
-        );
-      },
+      onSuccess: (serverResponse) => TicketDto.fromJson(serverResponse.data),
       onError: (json) => throw ServerException.fromJson(json),
     );
   }

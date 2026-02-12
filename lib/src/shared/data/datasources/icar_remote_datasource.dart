@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:icar/src/core/errors/exception.dart';
-import 'package:icar/src/shared/data/models/icar_model.dart';
+import 'package:icar/src/shared/data/dto/icar_dto.dart';
 import 'package:icar/src/utils/networks/headers_builder.dart';
 import 'package:icar/src/utils/networks/response_handler.dart';
 import 'package:icar/src/utils/networks/uri_builder.dart';
@@ -15,7 +15,7 @@ IcarRemoteDatasource icarRemoteDatasource(Ref ref) {
 }
 
 class IcarRemoteDatasource {
-  Future<List<IcarModel>> getIcars(String token, {int? icarStopId}) async {
+  Future<List<IcarDto>> getIcars(String token, {int? icarStopId}) async {
     final response = await http.get(
       uriBuilder(
         endpoint: "/api/icars/",
@@ -23,11 +23,11 @@ class IcarRemoteDatasource {
       ),
       headers: headersBuilder(token: token),
     );
-    return responseHandler<List<IcarModel>>(
+    return responseHandler<List<IcarDto>>(
       response,
       onSuccess: (serverResponse) {
         return (serverResponse.data as List)
-            .map((icar) => IcarModel.fromJson(icar))
+            .map((icar) => IcarDto.fromJson(icar))
             .toList();
       },
       onError: (json) => throw ServerException.fromJson(json),

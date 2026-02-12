@@ -5,16 +5,19 @@ part 'should_show_onboarding.g.dart';
 
 @riverpod
 class ShouldShowOnboarding extends _$ShouldShowOnboarding {
-  late OnboardingRepository onboardingRepository;
-
   @override
   bool build() {
-    onboardingRepository = ref.watch(onboardingRepositoryProvider);
+    OnboardingRepository onboardingRepository = ref.watch(
+      onboardingRepositoryProvider,
+    );
     return onboardingRepository.getShouldShowOnboarding();
   }
 
   void setShouldShowOnboarding(bool shouldShowOnboarding) {
-    state = shouldShowOnboarding;
+    OnboardingRepository onboardingRepository = ref.read(
+      onboardingRepositoryProvider,
+    );
     onboardingRepository.setShouldShowOnboarding(shouldShowOnboarding);
+    state = shouldShowOnboarding;
   }
 }

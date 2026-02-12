@@ -15,7 +15,7 @@ class SelectIcarStopOptions extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          HomeLocalizations.of(context)!.selectStopLabel('all_options'),
+          HomeLocalizations.of(context)!.selectStopLabelAllOptions,
           style: Theme.of(
             context,
           ).textTheme.labelMedium!.copyWith(color: AppColors.gray500),

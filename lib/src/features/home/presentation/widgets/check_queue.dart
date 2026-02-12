@@ -43,23 +43,17 @@ class CheckQueue extends ConsumerWidget {
                             context,
                           )!.stopWithName(selectedStop.name)
                           : null,
-                  hintText: HomeLocalizations.of(
-                    context,
-                  )!.checkQueueHint('stop'),
+                  hintText: HomeLocalizations.of(context)!.checkQueueHintStop,
                   iconSvg: AppIconsSvg.busStop,
-                  label: HomeLocalizations.of(context)!.checkQueueLabel('stop'),
+                  label: HomeLocalizations.of(context)!.checkQueueLabelStop,
                 ),
                 const SizedBox(height: 10),
                 CheckQueueSelect(
                   onTap: () => context.go("/home/selectroute"),
                   value: selectedRoute?.name,
-                  hintText: HomeLocalizations.of(
-                    context,
-                  )!.checkQueueHint('route'),
+                  hintText: HomeLocalizations.of(context)!.checkQueueHintRoute,
                   iconSvg: AppIconsSvg.route,
-                  label: HomeLocalizations.of(
-                    context,
-                  )!.checkQueueLabel('route'),
+                  label: HomeLocalizations.of(context)!.checkQueueLabelRoute,
                 ),
                 const SizedBox(height: 10),
                 SizedBox(

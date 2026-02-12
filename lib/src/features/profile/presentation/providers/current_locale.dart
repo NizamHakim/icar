@@ -7,16 +7,15 @@ part 'current_locale.g.dart';
 
 @Riverpod(keepAlive: true)
 class CurrentLocale extends _$CurrentLocale {
-  late ProfileRepository profileRepository;
-
   @override
   Locale build() {
-    profileRepository = ref.watch(profileRepositoryProvider);
+    final profileRepository = ref.watch(profileRepositoryProvider);
     return profileRepository.getLocale();
   }
 
   void setLocale(Locale locale) {
     state = locale;
+    final profileRepository = ref.read(profileRepositoryProvider);
     profileRepository.setLocale(locale);
   }
 }

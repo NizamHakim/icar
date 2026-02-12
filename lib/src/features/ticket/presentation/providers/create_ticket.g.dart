@@ -6,7 +6,7 @@ part of 'create_ticket.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$createTicketHash() => r'81b3870d9410215b41ed82eec524b0068a2945b2';
+String _$createTicketHash() => r'a034eb88b58c919b2b19b216a0a5129165594fab';
 
 /// See also [CreateTicket].
 @ProviderFor(CreateTicket)

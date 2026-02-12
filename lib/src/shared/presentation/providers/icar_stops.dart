@@ -15,7 +15,7 @@ Future<List<IcarStop>> icarStops(Ref ref) async {
 
   final icarStopOptionsEither = await icarStopRepository.getStops(
     currentUser.token,
-    userPosition,
+    userPosition: userPosition,
   );
 
   return icarStopOptionsEither.fold(

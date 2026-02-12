@@ -9,6 +9,7 @@ import 'package:icar/src/core/config/themes/app_icons.dart';
 import 'package:icar/src/features/profile/presentation/widgets/logout_dialog.dart';
 import 'package:icar/src/features/profile/presentation/widgets/profile_menu_tile.dart';
 import 'package:icar/src/shared/presentation/widgets/root_container.dart';
+import 'package:icar/src/utils/fake_data.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class ProfileScreen extends ConsumerWidget {
@@ -40,7 +41,7 @@ class ProfileScreen extends ConsumerWidget {
             Skeletonizer(
               enabled: currentUser == null,
               child: Text(
-                currentUser?.name ?? BoneMock.fullName,
+                currentUser?.name ?? fakeUser.name,
                 style: Theme.of(context).textTheme.titleMedium!.copyWith(
                   color: AppColors.gray900,
                   fontWeight: FontWeight.w600,
@@ -51,7 +52,7 @@ class ProfileScreen extends ConsumerWidget {
             Skeletonizer(
               enabled: currentUser == null,
               child: Text(
-                currentUser?.email ?? BoneMock.email,
+                currentUser?.email ?? fakeUser.email,
                 style: Theme.of(
                   context,
                 ).textTheme.bodyMedium!.copyWith(color: AppColors.gray500),

@@ -5,6 +5,7 @@ import 'package:icar/src/features/ticket/presentation/providers/ticket_details.d
 import 'package:icar/src/l10n/generated/ticket_localizations.dart';
 import 'package:icar/src/core/config/themes/app_colors.dart';
 import 'package:icar/src/features/ticket/presentation/widgets/ticket_card/ticket_card.dart';
+import 'package:icar/src/utils/fake_data.dart';
 import 'package:icar/src/utils/handle_error.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -34,7 +35,12 @@ class TicketDetailsScreen extends ConsumerWidget {
           loading: () {
             return _content(
               context,
-              ticket: fakeTicketDetails,
+              ticket: fakeTicket.copyWith(
+                schedule: fakeSchedule1.copyWith(
+                  icarStop: fakeIcarStop,
+                  icar: fakeIcar.copyWith(icarRoute: fakeIcarRoute),
+                ),
+              ),
               isLoading: true,
             );
           },

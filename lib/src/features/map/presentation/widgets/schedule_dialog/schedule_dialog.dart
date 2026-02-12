@@ -5,6 +5,7 @@ import 'package:icar/src/core/config/themes/app_icons.dart';
 import 'package:icar/src/features/map/presentation/providers/icars_with_schedules.dart';
 import 'package:icar/src/shared/presentation/providers/icar_stop.dart';
 import 'package:icar/src/shared/presentation/widgets/app_icon.dart';
+import 'package:icar/src/utils/fake_data.dart';
 import 'package:icar/src/utils/handle_error.dart';
 import 'package:icar/src/features/map/presentation/widgets/schedule_dialog/schedule_dialog_content.dart';
 import 'package:icar/src/features/map/presentation/widgets/schedule_dialog/schedule_dialog_divider.dart';
@@ -19,7 +20,9 @@ class ScheduleDialog extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final icarStop = ref.watch(icarStopProvider(icarStopId));
-    final icarsList = ref.watch(icarsWithSchedulesProvider(icarStopId));
+    final icarsList = ref.watch(
+      icarsWithSchedulesProvider(icarStopId: icarStopId),
+    );
 
     return Center(
       child: Padding(
@@ -79,7 +82,16 @@ class ScheduleDialog extends ConsumerWidget {
                       loading: () {
                         return Skeletonizer(
                           child: ScheduleDialogContent(
-                            icarList: fakeIcarsWithSchedules,
+                            icarList: [
+                              fakeIcar.copyWith(
+                                icarRoute: fakeIcarRoute,
+                                schedules: List.generate(10, (index) {
+                                  return (index < 5)
+                                      ? fakeSchedule1
+                                      : fakeSchedule2;
+                                }),
+                              ),
+                            ],
                           ),
                         );
                       },

@@ -1,6 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:icar/src/features/onboarding/data/datasource/onboarding_local_datasource.dart';
 import 'package:icar/src/features/onboarding/data/repositories/onboarding_repository_impl.dart';
+// ignore: unused_import
+import 'package:icar/src/features/onboarding/data/repositories/onboarding_repository_mock.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'onboarding_repository.g.dart';
@@ -11,6 +13,7 @@ OnboardingRepository onboardingRepository(Ref ref) {
     onboardingLocalDatasourceProvider,
   );
   return OnboardingRepositoryImpl(onboardingLocalDatasource);
+  // return OnboardingRepositoryMock(onboardingLocalDatasource);
 }
 
 abstract class OnboardingRepository {

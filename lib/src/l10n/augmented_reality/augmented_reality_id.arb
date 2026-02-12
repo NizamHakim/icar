@@ -1,0 +1,8 @@
+{
+  "@@locale": "id",
+  "cameraPermissionTitle": "Izin Kamera",
+  "cameraPermissionDesc": "Izinkan akses camera untuk menggunakan fitur AR.",
+  "stayDisabled": "Tetap Nonaktif",
+  "grantPermission": "Berikan Izin",
+  "enable": "Aktifkan"
+}

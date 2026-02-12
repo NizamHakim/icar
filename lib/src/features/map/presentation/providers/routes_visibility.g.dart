@@ -6,7 +6,7 @@ part of 'routes_visibility.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$routesVisibilityHash() => r'cdbb2ffe9315b103df8dee116d383256c274709d';
+String _$routesVisibilityHash() => r'4629a7b33e841a1fd46607c5ebac0d322532ac10';
 
 /// See also [RoutesVisibility].
 @ProviderFor(RoutesVisibility)

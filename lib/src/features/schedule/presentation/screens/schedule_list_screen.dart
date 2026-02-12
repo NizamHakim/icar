@@ -8,6 +8,7 @@ import 'package:icar/src/shared/presentation/providers/icar_stop.dart';
 import 'package:icar/src/shared/presentation/widgets/centered_gray_text.dart';
 import 'package:icar/src/core/config/themes/app_colors.dart';
 import 'package:icar/src/features/schedule/presentation/widgets/schedule_list_tile.dart';
+import 'package:icar/src/utils/fake_data.dart';
 import 'package:icar/src/utils/handle_error.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -104,7 +105,13 @@ class ScheduleListScreen extends ConsumerWidget {
           loading: () {
             return _content(
               context,
-              scheduleListData: fakeSchedules,
+              scheduleListData: List.generate(
+                6,
+                (index) => fakeSchedule1.copyWith(
+                  icar: fakeIcar.copyWith(icarRoute: fakeIcarRoute),
+                  icarStop: fakeIcarStop,
+                ),
+              ),
               isLoading: true,
             );
           },

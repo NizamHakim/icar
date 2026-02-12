@@ -2,7 +2,7 @@ import 'package:fpdart/fpdart.dart';
 import 'package:icar/src/core/errors/failure.dart';
 import 'package:icar/src/shared/data/datasources/icar_remote_datasource.dart';
 import 'package:icar/src/shared/data/datasources/icar_websocket_datasource.dart';
-import 'package:icar/src/shared/data/models/icar_websocket_response_model.dart';
+import 'package:icar/src/shared/data/dto/icar_websocket_response_dto.dart';
 import 'package:icar/src/shared/domain/entities/icar.dart';
 import 'package:icar/src/shared/domain/entities/icar_position.dart';
 import 'package:icar/src/shared/domain/entities/ticket_proximity.dart';
@@ -16,12 +16,12 @@ class IcarRepositoryImpl extends IcarRepository {
 
   @override
   Future<Either<Failure, List<Icar>>> getIcarsWithSchedulesByStopId(
-    String token,
-    int icarStopId,
-  ) async {
+    String token, {
+    required int icarStopId,
+  }) async {
     try {
       final result = await _icarRemote.getIcars(token, icarStopId: icarStopId);
-      return Right(result.map((icarModel) => icarModel.toEntity()).toList());
+      return Right(result.map((icarDto) => icarDto.toEntity()).toList());
     } catch (e) {
       return Left(Failure.fromException(e));
     }
@@ -29,19 +29,19 @@ class IcarRepositoryImpl extends IcarRepository {
 
   @override
   Stream<(String, IcarPosition, int?)> getIcarPositionStream() async* {
-    await for (final icarWebsocketResponseModel in _icarWebsocket.stream) {
-      if (icarWebsocketResponseModel case IcarPositionWebsocketResponse()) {
+    await for (final icarWebsocketResponseDto in _icarWebsocket.stream) {
+      if (icarWebsocketResponseDto case IcarPositionWebsocketResponse()) {
         yield (
-          icarWebsocketResponseModel.type,
-          icarWebsocketResponseModel.icarPosition.toEntity(),
+          icarWebsocketResponseDto.type,
+          icarWebsocketResponseDto.icarPosition.toEntity(),
           null,
         );
-      } else if (icarWebsocketResponseModel
+      } else if (icarWebsocketResponseDto
           case IcarDisconnectedWebsocketResponse()) {
         yield (
-          icarWebsocketResponseModel.type,
-          icarWebsocketResponseModel.icarPosition.toEntity(),
-          icarWebsocketResponseModel.canceledTickets,
+          icarWebsocketResponseDto.type,
+          icarWebsocketResponseDto.icarPosition.toEntity(),
+          icarWebsocketResponseDto.canceledTickets,
         );
       }
     }
@@ -49,9 +49,9 @@ class IcarRepositoryImpl extends IcarRepository {
 
   @override
   Stream<List<TicketProximity>> getTicketsProximityStream() async* {
-    await for (final icarWebsocketResponseModel in _icarWebsocket.stream) {
-      if (icarWebsocketResponseModel case IcarPositionWebsocketResponse()) {
-        yield icarWebsocketResponseModel.ticketsProximity
+    await for (final icarWebsocketResponseDto in _icarWebsocket.stream) {
+      if (icarWebsocketResponseDto case IcarPositionWebsocketResponse()) {
+        yield icarWebsocketResponseDto.ticketsProximity
             .map((ticketProximity) => ticketProximity.toEntity())
             .toList();
       }

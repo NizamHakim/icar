@@ -27,66 +27,78 @@ class AuthLocalizationsId extends AuthLocalizations {
   String get doesntHaveAnAccount => 'Belum punya akun?';
 
   @override
-  String inputLabel(String label) {
-    String _temp0 = intl.Intl.selectLogic(
-      label,
-      {
-        'name': 'Nama',
-        'email': 'Email',
-        'password': 'Password',
-        'confirmPassword': 'Konfirmasi Password',
-        'other': 'Unknown value',
-      },
-    );
-    return '$_temp0';
-  }
+  String get inputLabelName => 'Nama';
 
   @override
-  String inputHint(String hint) {
-    String _temp0 = intl.Intl.selectLogic(
-      hint,
-      {
-        'name': 'Masukkan nama',
-        'email': 'Masukkan email',
-        'password': 'Masukkan password',
-        'confirmPassword': 'Masukkan password',
-        'other': 'Unknown value',
-      },
-    );
-    return '$_temp0';
-  }
+  String get inputLabelEmail => 'Email';
 
   @override
-  String inputError(String error) {
+  String get inputLabelPassword => 'Password';
+
+  @override
+  String get inputLabelConfirmPassword => 'Konfirmasi Password';
+
+  @override
+  String get inputHintName => 'Masukkan nama';
+
+  @override
+  String get inputHintEmail => 'Masukkan email';
+
+  @override
+  String get inputHintPassword => 'Masukkan password';
+
+  @override
+  String get inputHintConfirmPassword => 'Masukkan password';
+
+  @override
+  String inputNameError(String nameError) {
     String _temp0 = intl.Intl.selectLogic(
-      error,
+      nameError,
       {
         'name_required': 'Nama tidak boleh kosong',
+        'other': 'Unknown value',
+      },
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String inputEmailError(String emailError) {
+    String _temp0 = intl.Intl.selectLogic(
+      emailError,
+      {
         'email_required': 'Email tidak boleh kosong',
         'email_invalid': 'Email tidak valid',
         'email_registered': 'Email sudah digunakan',
         'credentials_mismatch': 'Kombinasi email dan password salah',
-        'password_required': 'Password tidak boleh kosong',
-        'password_tooShort': 'Password minimal terdiri dari 8 karakter',
-        'confirmPassword_required': 'Konfirmasi password tidak boleh kosong',
-        'confirmPassword_mismatch': 'Konfirmasi password tidak sama dengan password',
-        'other': 'An unexpected error occurred',
+        'other': 'Unknown value',
       },
     );
     return '$_temp0';
   }
 
   @override
-  String authSuccess(String success) {
+  String inputPasswordError(String passwordError) {
     String _temp0 = intl.Intl.selectLogic(
-      success,
+      passwordError,
       {
-        'login_success': 'Login berhasil',
-        'user_created_successfully': 'Akun berhasil dibuat',
-        'logout_success': 'Berhasil logout',
+        'password_required': 'Password tidak boleh kosong',
+        'password_tooShort': 'Password minimal terdiri dari 8 karakter',
+        'confirmPassword_required': 'Konfirmasi password tidak boleh kosong',
+        'confirmPassword_mismatch': 'Konfirmasi password tidak sama dengan password',
+        'credentials_mismatch': 'Kombinasi email dan password salah',
         'other': 'Unknown value',
       },
     );
     return '$_temp0';
   }
+
+  @override
+  String get login_success => 'Login berhasil';
+
+  @override
+  String get user_created_successfully => 'Akun berhasil dibuat';
+
+  @override
+  String get logout_success => 'Berhasil logout';
 }

@@ -6,12 +6,12 @@ part of 'logout.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$logoutHash() => r'496e4ca2b26cfa5726aadd88d73e4cc7f5eb0ef1';
+String _$logoutHash() => r'000270b76789174d61802869ff9559f48941837c';
 
-/// See also [logout].
-@ProviderFor(logout)
-final logoutProvider = AutoDisposeFutureProvider<void>.internal(
-  logout,
+/// See also [Logout].
+@ProviderFor(Logout)
+final logoutProvider = AutoDisposeAsyncNotifierProvider<Logout, bool?>.internal(
+  Logout.new,
   name: r'logoutProvider',
   debugGetCreateSourceHash:
       const bool.fromEnvironment('dart.vm.product') ? null : _$logoutHash,
@@ -19,8 +19,6 @@ final logoutProvider = AutoDisposeFutureProvider<void>.internal(
   allTransitiveDependencies: null,
 );
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef LogoutRef = AutoDisposeFutureProviderRef<void>;
+typedef _$Logout = AutoDisposeAsyncNotifier<bool?>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -1,42 +1,36 @@
-import 'package:icar/src/core/config/themes/app_colors.dart';
 import 'package:icar/src/core/errors/failure.dart';
-import 'package:icar/src/core/key/navigator_key.dart';
 
 import 'package:icar/src/features/auth/domain/entities/user.dart';
 import 'package:icar/src/features/auth/domain/repositories/auth_repository.dart';
 import 'package:icar/src/features/auth/presentation/providers/current_user.dart';
-import 'package:icar/src/features/auth/presentation/providers/signup_form_errors.dart';
-import 'package:icar/src/l10n/generated/auth_localizations.dart';
-import 'package:icar/src/utils/show_snackbar.dart';
+import 'package:icar/src/features/auth/presentation/providers/states/signup_form_errors_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'signup.g.dart';
 
 @riverpod
 class Signup extends _$Signup {
-  late AuthRepository authRepository;
-
   @override
   FutureOr<User?> build() {
-    authRepository = ref.watch(authRepositoryProvider);
     return null;
   }
 
-  Future<void> signup(
-    String name,
-    String email,
-    String password,
-    String confirmPassword,
-  ) async {
+  Future<void> signup({
+    required String name,
+    required String email,
+    required String password,
+    required String confirmPassword,
+  }) async {
     state = const AsyncValue.loading();
+    final authRepository = ref.read(authRepositoryProvider);
     final signupFormErrorsNotifier = ref.read(
       signupFormErrorsProvider.notifier,
     );
     final userEither = await authRepository.signup(
-      name,
-      email,
-      password,
-      confirmPassword,
+      name: name,
+      email: email,
+      password: password,
+      confirmPassword: confirmPassword,
     );
 
     userEither.fold(
@@ -46,26 +40,26 @@ class Signup extends _$Signup {
           state = const AsyncData(null);
         } else {
           state = AsyncError(failure, StackTrace.current);
-          showSnackBar(
-            navigatorKey.currentContext!,
-            failure.message,
-            textColor: AppColors.white,
-            backgroundColor: AppColors.error500,
-          );
         }
       },
       (data) {
-        final (user, message) = data;
+        final user = data;
         authRepository.cacheUser(user.token);
         ref.read(currentUserProvider.notifier).setUser(user);
         state = AsyncData(user);
-        showSnackBar(
-          navigatorKey.currentContext!,
-          AuthLocalizations.of(
-            navigatorKey.currentContext!,
-          )!.authSuccess(message),
-        );
       },
     );
+  }
+}
+
+@riverpod
+class SignupFormErrors extends _$SignupFormErrors {
+  @override
+  SignupFormErrorsState build() {
+    return const SignupFormErrorsState();
+  }
+
+  void updateError(Map<String, String> errors) {
+    state = SignupFormErrorsState.fromJson(errors);
   }
 }

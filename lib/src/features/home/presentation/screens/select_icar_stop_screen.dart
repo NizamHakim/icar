@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:icar/src/features/home/presentation/providers/icar_stops_options.dart';
-import 'package:icar/src/features/home/presentation/providers/search_stop.dart';
+import 'package:icar/src/features/home/presentation/providers/search_icar_stop.dart';
 import 'package:icar/src/l10n/generated/home_localizations.dart';
 import 'package:icar/src/shared/presentation/widgets/app_icon.dart';
 import 'package:icar/src/shared/presentation/widgets/centered_gray_text.dart';
 import 'package:icar/src/shared/presentation/widgets/root_container.dart';
+import 'package:icar/src/utils/fake_data.dart';
 import 'package:icar/src/utils/handle_error.dart';
 import 'package:icar/src/core/config/themes/app_colors.dart';
 import 'package:icar/src/core/config/themes/app_icons.dart';
@@ -18,7 +19,7 @@ class SelectIcarStopScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final searchStopValue = ref.watch(searchStopProvider);
+    final searchStopValue = ref.watch(searchIcarStopProvider);
     final icarStopOptionsFromHistory = ref.watch(
       icarStopsOptionsFromHistoryProvider,
     );
@@ -36,7 +37,7 @@ class SelectIcarStopScreen extends ConsumerWidget {
           height: 40,
           child: TextField(
             onChanged: (value) {
-              ref.read(searchStopProvider.notifier).setSearchValue(value);
+              ref.read(searchIcarStopProvider.notifier).setSearchValue(value);
             },
             decoration: InputDecoration(
               prefixIcon: const Padding(
@@ -73,7 +74,10 @@ class SelectIcarStopScreen extends ConsumerWidget {
                   return Skeletonizer(
                     enabled: true,
                     child: SelectIcarStopHistory(
-                      icarStopOptionsFromHistory: fakeIcarStops,
+                      icarStopOptionsFromHistory: List.generate(
+                        3,
+                        (index) => fakeIcarStop,
+                      ),
                     ),
                   );
                 },
@@ -98,7 +102,10 @@ class SelectIcarStopScreen extends ConsumerWidget {
                 loading: () {
                   return Skeletonizer(
                     child: SelectIcarStopOptions(
-                      icarStopOptions: fakeIcarStops,
+                      icarStopOptions: List.generate(
+                        12,
+                        (index) => fakeIcarStop,
+                      ),
                     ),
                   );
                 },

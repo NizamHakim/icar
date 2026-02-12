@@ -18,7 +18,11 @@ Stream<Map<int, Position>> icarsPositionMapStream(Ref ref) async* {
       icarPositionMap[icarPosition.id] = icarPosition.position!;
       yield icarPositionMap;
     } else if (type == "disconnect") {
-      handleIcarDisconnected(ref, icarPosition, canceledTickets!);
+      handleIcarDisconnected(
+        ref,
+        icarPosition: icarPosition,
+        canceledTickets: canceledTickets!,
+      );
       icarPositionMap.remove(icarPosition.id);
       yield icarPositionMap;
     }

@@ -38,8 +38,8 @@ void handleTicketProximityArrived(Ref ref, int ticketId) async {
   final currentUser = ref.read(currentUserProvider).requireValue!;
   final ticketEither = await ticketRepository.updateStatus(
     currentUser.token,
-    ticketId,
-    TicketStatus.FINISHED,
+    ticketId: ticketId,
+    status: TicketStatus.FINISHED,
   );
 
   ticketEither.fold(

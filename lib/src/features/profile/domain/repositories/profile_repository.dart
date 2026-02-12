@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:icar/src/features/profile/data/datasources/profile_local_datasource.dart';
 import 'package:icar/src/features/profile/data/repositories/profile_repository_impl.dart';
+// ignore: unused_import
+import 'package:icar/src/features/profile/data/repositories/profile_repository_mock.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'profile_repository.g.dart';
@@ -10,6 +12,7 @@ part 'profile_repository.g.dart';
 ProfileRepository profileRepository(Ref ref) {
   final profileLocalDatasource = ref.watch(profileLocalDatasourceProvider);
   return ProfileRepositoryImpl(profileLocalDatasource);
+  // return ProfileRepositoryMock(profileLocalDatasource);
 }
 
 abstract class ProfileRepository {

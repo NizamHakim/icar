@@ -7,7 +7,7 @@ part of 'icars_position_map_stream.dart';
 // **************************************************************************
 
 String _$icarsPositionMapStreamHash() =>
-    r'7105dfc687ab0ba2eaf8d3198b52b75e47d11216';
+    r'26f9f76807707cc37a638f7bc188230d70c56acb';
 
 /// See also [icarsPositionMapStream].
 @ProviderFor(icarsPositionMapStream)

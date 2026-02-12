@@ -7,7 +7,7 @@ part of 'icars_with_schedules.dart';
 // **************************************************************************
 
 String _$icarsWithSchedulesHash() =>
-    r'98602bdf9ac1492620fcccb0a443259b1b856f5b';
+    r'50177cba5f6263c777e15d7e396c882dfc9f049f';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -40,15 +40,15 @@ class IcarsWithSchedulesFamily extends Family<AsyncValue<List<Icar>>> {
   const IcarsWithSchedulesFamily();
 
   /// See also [icarsWithSchedules].
-  IcarsWithSchedulesProvider call(int icarStopId) {
-    return IcarsWithSchedulesProvider(icarStopId);
+  IcarsWithSchedulesProvider call({required int icarStopId}) {
+    return IcarsWithSchedulesProvider(icarStopId: icarStopId);
   }
 
   @override
   IcarsWithSchedulesProvider getProviderOverride(
     covariant IcarsWithSchedulesProvider provider,
   ) {
-    return call(provider.icarStopId);
+    return call(icarStopId: provider.icarStopId);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -69,9 +69,12 @@ class IcarsWithSchedulesFamily extends Family<AsyncValue<List<Icar>>> {
 /// See also [icarsWithSchedules].
 class IcarsWithSchedulesProvider extends AutoDisposeFutureProvider<List<Icar>> {
   /// See also [icarsWithSchedules].
-  IcarsWithSchedulesProvider(int icarStopId)
+  IcarsWithSchedulesProvider({required int icarStopId})
     : this._internal(
-        (ref) => icarsWithSchedules(ref as IcarsWithSchedulesRef, icarStopId),
+        (ref) => icarsWithSchedules(
+          ref as IcarsWithSchedulesRef,
+          icarStopId: icarStopId,
+        ),
         from: icarsWithSchedulesProvider,
         name: r'icarsWithSchedulesProvider',
         debugGetCreateSourceHash:

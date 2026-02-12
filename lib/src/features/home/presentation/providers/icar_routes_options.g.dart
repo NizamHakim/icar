@@ -6,7 +6,7 @@ part of 'icar_routes_options.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$icarRoutesOptionsHash() => r'b2af8e1c448c55525c054fdb1ec9167546195efa';
+String _$icarRoutesOptionsHash() => r'7483a3f6d787602c5aabc1038200bb68dfb0f024';
 
 /// See also [icarRoutesOptions].
 @ProviderFor(icarRoutesOptions)

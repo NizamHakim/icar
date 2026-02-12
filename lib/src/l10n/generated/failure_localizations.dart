@@ -95,11 +95,11 @@ abstract class FailureLocalizations {
     Locale('id')
   ];
 
-  /// No description provided for @failure.
+  /// No description provided for @unexpectedError.
   ///
   /// In en, this message translates to:
-  /// **'{failure, select, no_authentication_token{Token invalid, please login!} logout_failed{Logout failed!} other{Sorry, an unexpected error occured.\nPlease try again later.}}'**
-  String failure(String failure);
+  /// **'Sorry, an unexpected error occured.\nPlease try again later.'**
+  String get unexpectedError;
 }
 
 class _FailureLocalizationsDelegate extends LocalizationsDelegate<FailureLocalizations> {

@@ -6,7 +6,7 @@ part of 'icar_stop.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$icarStopHash() => r'226e6174cd1b16e4bf133428a67293c8b8eae7cf';
+String _$icarStopHash() => r'99f269e1b193ccb9ed6b6e0df1b4706716c141c2';
 
 /// Copied from Dart SDK
 class _SystemHash {

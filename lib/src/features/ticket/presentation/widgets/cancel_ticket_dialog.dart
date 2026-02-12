@@ -3,9 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:icar/src/features/ticket/domain/entities/ticket.dart';
 import 'package:icar/src/features/ticket/presentation/providers/cancel_ticket.dart';
+import 'package:icar/src/l10n/generated/failure_localizations.dart';
 import 'package:icar/src/l10n/generated/ticket_localizations.dart';
 import 'package:icar/src/core/config/themes/app_colors.dart';
 import 'package:icar/src/shared/presentation/widgets/circular_loader.dart';
+import 'package:icar/src/utils/networks/post_response_handler.dart';
+import 'package:icar/src/utils/show_snackbar.dart';
 
 class CancelTicketDialog extends ConsumerWidget {
   const CancelTicketDialog({super.key, required this.ticket});
@@ -15,6 +18,29 @@ class CancelTicketDialog extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isLoading = ref.watch(cancelTicketProvider).isLoading;
+
+    ref.listen(cancelTicketProvider, (_, next) {
+      postResponseHandler(
+        context,
+        next,
+        onSuccess: () {
+          showSnackBar(
+            context,
+            TicketLocalizations.of(context)!.ticketUpdateSuccess,
+          );
+          context.pop(next.value);
+        },
+        onError: () {
+          showSnackBar(
+            context,
+            FailureLocalizations.of(context)!.unexpectedError,
+            textColor: AppColors.white,
+            backgroundColor: AppColors.error500,
+            showCloseIcon: true,
+          );
+        },
+      );
+    });
 
     return AlertDialog(
       backgroundColor: AppColors.white,

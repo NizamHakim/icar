@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:icar/src/core/config/themes/app_theme.dart';
-import 'package:icar/src/core/routes/router.dart';
+import 'package:icar/src/core/router/router.dart';
 import 'package:icar/src/features/profile/presentation/providers/current_locale.dart';
+import 'package:icar/src/l10n/generated/augmented_reality_localizations.dart';
 import 'package:icar/src/l10n/generated/auth_localizations.dart';
 import 'package:icar/src/l10n/generated/failure_localizations.dart';
 import 'package:icar/src/l10n/generated/home_localizations.dart';
@@ -42,6 +43,7 @@ class App extends ConsumerWidget {
         TicketLocalizations.delegate,
         LocationLocalizations.delegate,
         NotificationLocalizations.delegate,
+        AugmentedrealityLocalizations.delegate,
         FailureLocalizations.delegate,
       ],
       supportedLocales: supportedLocales,

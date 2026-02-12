@@ -134,16 +134,11 @@ class TicketLocalizationsId extends TicketLocalizations {
   String get cancelTicketDialogCancel => 'Tetap antre';
 
   @override
-  String ticketSuccess(String success) {
-    String _temp0 = intl.Intl.selectLogic(
-      success,
-      {
-        'ticket_created_successfully': 'Tiket berhasil dibuat',
-        'ticket_status_updated_successfully': 'Tiket berhasil di update',
-        'ticket_review_updated_successfully': 'Review berhasil di update',
-        'other': 'Unknown value',
-      },
-    );
-    return '$_temp0';
-  }
+  String get ticketCreateSuccess => 'Tiket berhasil dibuat';
+
+  @override
+  String get ticketUpdateSuccess => 'Tiket berhasil di update';
+
+  @override
+  String get reviewUpdateSuccess => 'Review berhasil di update';
 }

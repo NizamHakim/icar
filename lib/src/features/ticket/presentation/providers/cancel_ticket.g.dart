@@ -6,7 +6,7 @@ part of 'cancel_ticket.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$cancelTicketHash() => r'aa3dec2205ecdc4436cb358c2d9888e890751186';
+String _$cancelTicketHash() => r'f76d98e1abcf52dd77ded66fa80eefa21228ba2e';
 
 /// See also [CancelTicket].
 @ProviderFor(CancelTicket)

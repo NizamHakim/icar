@@ -27,66 +27,78 @@ class AuthLocalizationsEn extends AuthLocalizations {
   String get doesntHaveAnAccount => 'Doesn\'t have an account?';
 
   @override
-  String inputLabel(String label) {
-    String _temp0 = intl.Intl.selectLogic(
-      label,
-      {
-        'name': 'Name',
-        'email': 'Email',
-        'password': 'Password',
-        'confirmPassword': 'Confirm Password',
-        'other': 'Unknown value',
-      },
-    );
-    return '$_temp0';
-  }
+  String get inputLabelName => 'Name';
 
   @override
-  String inputHint(String hint) {
-    String _temp0 = intl.Intl.selectLogic(
-      hint,
-      {
-        'name': 'Enter your name',
-        'email': 'Enter your email',
-        'password': 'Enter your password',
-        'confirmPassword': 'Enter your password',
-        'other': 'Unknown value',
-      },
-    );
-    return '$_temp0';
-  }
+  String get inputLabelEmail => 'Email';
 
   @override
-  String inputError(String error) {
+  String get inputLabelPassword => 'Password';
+
+  @override
+  String get inputLabelConfirmPassword => 'Confirm Password';
+
+  @override
+  String get inputHintName => 'Enter your name';
+
+  @override
+  String get inputHintEmail => 'Enter your email';
+
+  @override
+  String get inputHintPassword => 'Enter your password';
+
+  @override
+  String get inputHintConfirmPassword => 'Enter your password';
+
+  @override
+  String inputNameError(String nameError) {
     String _temp0 = intl.Intl.selectLogic(
-      error,
+      nameError,
       {
         'name_required': 'Name is required',
+        'other': 'Unknown value',
+      },
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String inputEmailError(String emailError) {
+    String _temp0 = intl.Intl.selectLogic(
+      emailError,
+      {
         'email_required': 'Email is required',
         'email_invalid': 'Email is invalid',
         'email_registered': 'Email is already registered',
         'credentials_mismatch': 'Email and password combination is incorrect',
-        'password_required': 'Password is required',
-        'password_tooShort': 'Password must be at least 8 characters long',
-        'confirmPassword_required': 'Confirm password is required',
-        'confirmPassword_mismatch': 'Confirm password and password does not match',
-        'other': 'An unexpected error occurred',
+        'other': 'Unknown value',
       },
     );
     return '$_temp0';
   }
 
   @override
-  String authSuccess(String success) {
+  String inputPasswordError(String passwordError) {
     String _temp0 = intl.Intl.selectLogic(
-      success,
+      passwordError,
       {
-        'login_success': 'Login successful',
-        'user_created_successfully': 'Account successfully created',
-        'logout_success': 'Logout successful',
+        'password_required': 'Password is required',
+        'password_tooShort': 'Password must be at least 8 characters long',
+        'confirmPassword_required': 'Confirm password is required',
+        'confirmPassword_mismatch': 'Confirm password and password does not match',
+        'credentials_mismatch': 'Email and password combination is incorrect',
         'other': 'Unknown value',
       },
     );
     return '$_temp0';
   }
+
+  @override
+  String get login_success => 'Login successful';
+
+  @override
+  String get user_created_successfully => 'Account successfully created';
+
+  @override
+  String get logout_success => 'Logout successful';
 }

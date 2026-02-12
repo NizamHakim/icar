@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:icar/src/core/config/themes/app_colors.dart';
+import 'package:icar/src/core/errors/failure.dart';
 import 'package:icar/src/features/auth/presentation/providers/login.dart';
-import 'package:icar/src/features/auth/presentation/providers/login_form_errors.dart';
 import 'package:icar/src/features/auth/presentation/widgets/auth_input.dart';
 import 'package:icar/src/features/auth/presentation/widgets/submit_button.dart';
 import 'package:icar/src/l10n/generated/auth_localizations.dart';
 import 'package:icar/src/shared/presentation/widgets/root_container.dart';
+import 'package:icar/src/utils/networks/post_response_handler.dart';
+import 'package:icar/src/utils/show_snackbar.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
@@ -19,8 +21,8 @@ class LoginScreen extends ConsumerStatefulWidget {
 }
 
 class _LoginScreenState extends ConsumerState<LoginScreen> {
-  final _emailController = TextEditingController(text: "email@gmail.com");
-  final _passwordController = TextEditingController(text: "00000000");
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -32,6 +34,25 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ref.listen(loginProvider, (_, next) {
+      postResponseHandler(
+        context,
+        next,
+        onSuccess: () {
+          showSnackBar(context, AuthLocalizations.of(context)!.login_success);
+        },
+        onError: () {
+          final failure = next.error as Failure;
+          showSnackBar(
+            context,
+            failure.message,
+            textColor: AppColors.white,
+            backgroundColor: AppColors.error500,
+          );
+        },
+      );
+    });
+
     final loginFormErrors = ref.watch(loginFormErrorsProvider);
     final isLoading = ref.watch(loginProvider).isLoading;
 
@@ -50,31 +71,28 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     AuthInput(
-                      label: AuthLocalizations.of(context)!.inputLabel('email'),
-                      hint: AuthLocalizations.of(context)!.inputHint('email'),
+                      label: AuthLocalizations.of(context)!.inputLabelEmail,
+                      hint: AuthLocalizations.of(context)!.inputHintEmail,
                       controller: _emailController,
+                      keyboardType: TextInputType.emailAddress,
                       errorText:
                           loginFormErrors.email != null
                               ? AuthLocalizations.of(
                                 context,
-                              )!.inputError(loginFormErrors.email!)
+                              )!.inputEmailError(loginFormErrors.email!)
                               : null,
                     ),
                     const SizedBox(height: 20),
                     AuthInput(
-                      label: AuthLocalizations.of(
-                        context,
-                      )!.inputLabel('password'),
-                      hint: AuthLocalizations.of(
-                        context,
-                      )!.inputHint('password'),
+                      label: AuthLocalizations.of(context)!.inputLabelPassword,
+                      hint: AuthLocalizations.of(context)!.inputHintPassword,
                       controller: _passwordController,
                       isObscure: true,
                       errorText:
                           loginFormErrors.password != null
                               ? AuthLocalizations.of(
                                 context,
-                              )!.inputError(loginFormErrors.password!)
+                              )!.inputPasswordError(loginFormErrors.password!)
                               : null,
                     ),
                     const SizedBox(height: 32),
@@ -85,8 +103,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         await ref
                             .read(loginProvider.notifier)
                             .login(
-                              _emailController.text,
-                              _passwordController.text,
+                              email: _emailController.text,
+                              password: _passwordController.text,
                             );
                       },
                     ),

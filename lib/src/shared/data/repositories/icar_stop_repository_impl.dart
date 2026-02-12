@@ -14,13 +14,16 @@ class IcarStopRepositoryImpl extends IcarStopRepository {
 
   @override
   Future<Either<Failure, List<IcarStop>>> getStops(
-    String token,
-    Position userPosition,
-  ) async {
+    String token, {
+    required Position userPosition,
+  }) async {
     try {
-      final result = await _icarStopRemote.getStops(token, userPosition);
+      final result = await _icarStopRemote.getStops(
+        token,
+        userPosition: userPosition,
+      );
       return Right(
-        result.map((icarStopModel) => icarStopModel.toEntity()).toList(),
+        result.map((icarStopDto) => icarStopDto.toEntity()).toList(),
       );
     } catch (e) {
       return Left(Failure.fromException(e));
@@ -29,15 +32,15 @@ class IcarStopRepositoryImpl extends IcarStopRepository {
 
   @override
   Future<Either<Failure, IcarStop>> getStopById(
-    String token,
-    Position userPosition,
-    int icarStopId,
-  ) async {
+    String token, {
+    required Position userPosition,
+    required int icarStopId,
+  }) async {
     try {
       final result = await _icarStopRemote.getStopById(
         token,
-        userPosition,
-        icarStopId,
+        userPosition: userPosition,
+        icarStopId: icarStopId,
       );
       return Right(result.toEntity());
     } catch (e) {

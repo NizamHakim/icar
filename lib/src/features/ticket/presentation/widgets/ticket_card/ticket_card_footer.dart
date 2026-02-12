@@ -47,7 +47,8 @@ class TicketCardFooter extends ConsumerWidget {
     }
 
     return OutlinedButton(
-      onPressed: () => context.go("/tickets/${ticket.id}/review"),
+      onPressed:
+          () => context.go("${GoRouterState.of(context).uri.path}/review"),
       style: OutlinedButton.styleFrom(
         side: const BorderSide(color: AppColors.primary500),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),

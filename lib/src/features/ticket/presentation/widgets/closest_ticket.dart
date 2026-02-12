@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:icar/src/features/ticket/domain/entities/ticket.dart';
 import 'package:icar/src/l10n/generated/ticket_localizations.dart';
 import 'package:icar/src/shared/presentation/widgets/app_icon.dart';
+import 'package:icar/src/utils/fake_data.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:icar/src/features/ticket/presentation/providers/closest_ticket.dart';
 import 'package:icar/src/l10n/generated/home_localizations.dart';
@@ -82,7 +83,12 @@ class ClosestTicket extends ConsumerWidget {
           loading: () {
             return _content(
               context,
-              closestTicket: fakeTicket,
+              closestTicket: fakeTicket.copyWith(
+                schedule: fakeSchedule1.copyWith(
+                  icarStop: fakeIcarStop,
+                  icar: fakeIcar.copyWith(icarRoute: fakeIcarRoute),
+                ),
+              ),
               isLoading: true,
             );
           },

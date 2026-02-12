@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:icar/src/core/errors/exception.dart';
-import 'package:icar/src/features/schedule/data/models/schedule_model.dart';
+import 'package:icar/src/features/schedule/data/dto/schedule_dto.dart';
 import 'package:icar/src/utils/networks/headers_builder.dart';
 import 'package:icar/src/utils/networks/response_handler.dart';
 import 'package:icar/src/utils/networks/uri_builder.dart';
@@ -15,7 +15,7 @@ ScheduleRemoteDatasource scheduleRemoteDatasource(Ref ref) {
 }
 
 class ScheduleRemoteDatasource {
-  Future<List<ScheduleModel>> getSchedules(
+  Future<List<ScheduleDto>> getSchedules(
     String token, {
     int? icarStopId,
     int? icarRouteId,
@@ -28,11 +28,11 @@ class ScheduleRemoteDatasource {
       headers: headersBuilder(token: token),
     );
 
-    return responseHandler<List<ScheduleModel>>(
+    return responseHandler<List<ScheduleDto>>(
       response,
       onSuccess: (serverResponse) {
         return (serverResponse.data as List)
-            .map((schedule) => ScheduleModel.fromJson(schedule))
+            .map((schedule) => ScheduleDto.fromJson(schedule))
             .toList();
       },
       onError: (json) => throw ServerException.fromJson(json),

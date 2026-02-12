@@ -227,11 +227,23 @@ abstract class TicketLocalizations {
   /// **'Stay on queue'**
   String get cancelTicketDialogCancel;
 
-  /// No description provided for @ticketSuccess.
+  /// No description provided for @ticketCreateSuccess.
   ///
   /// In en, this message translates to:
-  /// **'{success, select, ticket_created_successfully{Ticket created successfully} ticket_status_updated_successfully{Ticket updated successfully} ticket_review_updated_successfully{Review updated successfully} other{Unknown value}}'**
-  String ticketSuccess(String success);
+  /// **'Ticket created successfully'**
+  String get ticketCreateSuccess;
+
+  /// No description provided for @ticketUpdateSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Ticket updated successfully'**
+  String get ticketUpdateSuccess;
+
+  /// No description provided for @reviewUpdateSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Review updated successfully'**
+  String get reviewUpdateSuccess;
 }
 
 class _TicketLocalizationsDelegate extends LocalizationsDelegate<TicketLocalizations> {

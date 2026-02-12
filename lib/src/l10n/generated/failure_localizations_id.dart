@@ -9,15 +9,5 @@ class FailureLocalizationsId extends FailureLocalizations {
   FailureLocalizationsId([String locale = 'id']) : super(locale);
 
   @override
-  String failure(String failure) {
-    String _temp0 = intl.Intl.selectLogic(
-      failure,
-      {
-        'no_authentication_token': 'Token tidak valid, silakan login!',
-        'logout_failed': 'Logout gagal!',
-        'other': 'Terjadi kesalahan pada sistem.\nSilakan coba lagi dalam beberapa saat.',
-      },
-    );
-    return '$_temp0';
-  }
+  String get unexpectedError => 'Terjadi kesalahan pada sistem.\nSilakan coba lagi dalam beberapa saat.';
 }

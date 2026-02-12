@@ -6,15 +6,13 @@ part 'selected_icar_stop.g.dart';
 
 @riverpod
 class SelectedIcarStop extends _$SelectedIcarStop {
-  late IcarStopRepository icarStopRepository;
-
   @override
   IcarStop? build() {
-    icarStopRepository = ref.watch(icarStopRepositoryProvider);
     return null;
   }
 
   void setSelectedStop(IcarStop stop) {
+    final icarStopRepository = ref.read(icarStopRepositoryProvider);
     icarStopRepository.addStopToHistory(stop.id);
     state = stop;
   }

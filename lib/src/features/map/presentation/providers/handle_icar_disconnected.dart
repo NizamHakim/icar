@@ -7,10 +7,10 @@ import 'package:icar/src/shared/domain/entities/icar_position.dart';
 import 'package:icar/src/features/ticket/presentation/providers/refresh_tickets_state.dart';
 
 void handleIcarDisconnected(
-  Ref ref,
-  IcarPosition icarPosition,
-  int canceledTickets,
-) {
+  Ref ref, {
+  required IcarPosition icarPosition,
+  required int canceledTickets,
+}) {
   refreshTicketsState(ref);
   final notificationPlugin = ref.read(notificationsPluginProvider).requireValue;
   if (canceledTickets > 0) {

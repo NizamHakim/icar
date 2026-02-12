@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:icar/src/features/auth/presentation/providers/current_user.dart';
 import 'package:icar/src/shared/domain/entities/icar_route.dart';
@@ -13,7 +12,7 @@ Future<IcarRoute> icarRoute(Ref ref, int icarRouteId) async {
   final icarRouteRepository = ref.watch(icarRouteRepositoryProvider);
   final routeEither = await icarRouteRepository.getRouteById(
     currentUser.token,
-    icarRouteId,
+    icarRouteId: icarRouteId,
   );
 
   return routeEither.fold(
@@ -25,9 +24,3 @@ Future<IcarRoute> icarRoute(Ref ref, int icarRouteId) async {
     },
   );
 }
-
-final fakeIcarRoute = const IcarRoute(
-  id: 0,
-  name: "Dummy Route",
-  color: Colors.black,
-);

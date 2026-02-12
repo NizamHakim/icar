@@ -5,8 +5,12 @@ import 'package:icar/src/features/ticket/presentation/providers/review_ticket.da
 import 'package:icar/src/features/ticket/presentation/widgets/review/review_badge_list.dart';
 import 'package:icar/src/features/ticket/presentation/widgets/review/review_suggestion.dart';
 import 'package:icar/src/core/config/themes/app_colors.dart';
+import 'package:icar/src/l10n/generated/failure_localizations.dart';
 import 'package:icar/src/l10n/generated/shared_localizations.dart';
+import 'package:icar/src/l10n/generated/ticket_localizations.dart';
 import 'package:icar/src/shared/presentation/widgets/circular_loader.dart';
+import 'package:icar/src/utils/networks/post_response_handler.dart';
+import 'package:icar/src/utils/show_snackbar.dart';
 
 class Review extends ConsumerWidget {
   const Review({super.key, required this.ticket});
@@ -16,6 +20,28 @@ class Review extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isLoading = ref.watch(updateReviewProvider).isLoading;
+
+    ref.listen(updateReviewProvider, (_, next) {
+      postResponseHandler(
+        context,
+        next,
+        onSuccess: () {
+          showSnackBar(
+            context,
+            TicketLocalizations.of(context)!.reviewUpdateSuccess,
+          );
+        },
+        onError: () {
+          showSnackBar(
+            context,
+            FailureLocalizations.of(context)!.unexpectedError,
+            textColor: AppColors.white,
+            backgroundColor: AppColors.error500,
+            showCloseIcon: true,
+          );
+        },
+      );
+    });
 
     return Column(
       children: [

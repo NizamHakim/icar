@@ -1,16 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:icar/src/features/profile/presentation/providers/logout.dart';
+import 'package:icar/src/l10n/generated/auth_localizations.dart';
+import 'package:icar/src/l10n/generated/failure_localizations.dart';
 import 'package:icar/src/l10n/generated/profile_localizations.dart';
 import 'package:icar/src/core/config/themes/app_colors.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:icar/src/l10n/generated/shared_localizations.dart';
+import 'package:icar/src/utils/networks/post_response_handler.dart';
+import 'package:icar/src/utils/show_snackbar.dart';
 
 class LogoutDialog extends ConsumerWidget {
   const LogoutDialog({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen(logoutProvider, (_, next) {
+      postResponseHandler(
+        context,
+        next,
+        onSuccess: () {
+          showSnackBar(context, AuthLocalizations.of(context)!.logout_success);
+          context.pop();
+        },
+        onError: () {
+          showSnackBar(
+            context,
+            FailureLocalizations.of(context)!.unexpectedError,
+            textColor: AppColors.white,
+            backgroundColor: AppColors.error500,
+            showCloseIcon: true,
+          );
+        },
+      );
+    });
+
     return AlertDialog(
       backgroundColor: AppColors.white,
       title: Text(
@@ -46,7 +70,7 @@ class LogoutDialog extends ConsumerWidget {
         ),
         TextButton(
           onPressed: () {
-            ref.read(logoutProvider);
+            ref.read(logoutProvider.notifier).logout();
           },
           child: Text(
             SharedLocalizations.of(context)!.logout,
