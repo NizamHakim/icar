@@ -49,5 +49,5 @@ app.*.map.json
 
 # Unity Project
 # /unity/
-/android/unityLibrary/
-/ios/UnityLibrary/
+# /android/unityLibrary/
+# /ios/UnityLibrary/
