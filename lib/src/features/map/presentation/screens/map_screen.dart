@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -131,7 +133,12 @@ class _MapScreenState extends ConsumerState<MapScreen> {
               left: 20,
               child: FloatingToggle(),
             ),
-            const Positioned(top: 10, right: 0, child: ScanArButton()),
+            if (Platform.isAndroid)
+              const Positioned(
+                top: 10, 
+                right: 0, 
+                child: ScanArButton(),
+              ),
           ],
         ],
       );

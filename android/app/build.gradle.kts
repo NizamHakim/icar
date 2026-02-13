@@ -48,6 +48,6 @@ flutter {
 
 dependencies {
     implementation(project(":unityLibrary"))
-
+    implementation(project(":flutter_unity_widget_2"))
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
 }

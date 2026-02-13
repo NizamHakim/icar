@@ -32,8 +32,6 @@
     <string>Camera access required for target detection and tracking</string>
     <key>UILaunchStoryboardName</key>
     <string>LaunchScreen-iPhone</string>
-    <key>UILaunchStoryboardName~ipad</key>
-    <string>LaunchScreen-iPad</string>
     <key>UILaunchStoryboardName~iphone</key>
     <string>LaunchScreen-iPhone</string>
     <key>UILaunchStoryboardName~ipod</key>
